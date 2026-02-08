@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LiveCoding_Middle_CleanArch.API/LiveCoding_Middle_CleanArch.API.csproj" />
+    <Project Path="src/LiveCoding_Middle_CleanArch.Application/LiveCoding_Middle_CleanArch.Application.csproj" />
+    <Project Path="src/LiveCoding_Middle_CleanArch.Domain/LiveCoding_Middle_CleanArch.Domain.csproj" />
+    <Project Path="src/LiveCoding_Middle_CleanArch.Infrastructure/LiveCoding_Middle_CleanArch.Infrastructure.csproj" />
+  </Folder>
+</Solution>
