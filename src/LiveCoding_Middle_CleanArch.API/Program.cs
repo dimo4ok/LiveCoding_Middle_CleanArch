@@ -1,9 +1,9 @@
 using LiveCoding_Middle_CleanArch.API;
 using LiveCoding_Middle_CleanArch.API.Endpoints;
 using LiveCoding_Middle_CleanArch.Application.Common.Extensions;
-using LiveCoding_Middle_CleanArch.Application.MediatR.Commands.FetchProducts;
+using LiveCoding_Middle_CleanArch.Application.Common.Models;
 using LiveCoding_Middle_CleanArch.Infrastructure;
-using Microsoft.AspNetCore.Diagnostics;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,11 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.Configure<StorageSettings>(builder.Configuration.GetSection("StorageSettings"));
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(ApplicationExtensions).Assembly));
@@ -30,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseMiddleware<GlobalErrorHandlingMiddleware>();
 
